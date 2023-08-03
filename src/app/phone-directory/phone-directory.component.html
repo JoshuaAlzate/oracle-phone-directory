@@ -37,17 +37,17 @@
     id="error"
     data-testid="error"
     [hidden]="!errors()"
-    class="text-red-600 mb-4 "
+    class="text-red-600 mb-4"
   >
     <ul>
       <li>
-        {{ errors().nameError }}
+        {{ errors()["nameError"] }}
       </li>
       <li>
-        {{ errors().mobileError }}
+        {{ errors()["mobileError"] }}
       </li>
       <li>
-        {{ errors().emailError }}
+        {{ errors()["emailError"] }}
       </li>
     </ul>
   </div>

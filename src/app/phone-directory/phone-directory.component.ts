@@ -69,11 +69,7 @@ export class PhoneDirectoryComponent {
   contacts$ = new BehaviorSubject<Contact[]>([]);
   displayedColumns: string[] = ['name', 'mobile', 'email'];
 
-  errors = signal<{
-    nameError?: string;
-    mobileError?: string;
-    emailError?: string;
-  }>({});
+  errors = signal<{[key: string]: string}>({});
 
   constructor() {
     this.formChanges().forEach((a) => a.pipe(takeUntilDestroyed()).subscribe());
@@ -103,13 +99,11 @@ export class PhoneDirectoryComponent {
               error = `It should be less than or equal to ${errors['maxlength'].requiredLength} characters in length`;
             }
             this.errors.update((item) => {
-              //@ts-ignore
               item[`${controlName}Error`] = error;
               return item;
             });
           } else {
             this.errors.update((item) => {
-              //@ts-ignore
               delete item[`${controlName}Error`];
               return item;
             });
