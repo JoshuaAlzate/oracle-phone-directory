@@ -1,0 +1,78 @@
+<div class="p-10 w-full">
+  <form
+    [formGroup]="contactForm"
+    (ngSubmit)="submitForm()"
+    class="mb-4 w-full flex items-end justify-center gap-5"
+  >
+    <input
+      type="text"
+      id="name"
+      formControlName="name"
+      class="w-1/4 p-2 border rounded"
+      placeholder="Contact name"
+    />
+    <input
+      type="text"
+      id="mobile"
+      formControlName="mobile"
+      class="w-1/4 p-2 border rounded"
+      placeholder="Mobile Number"
+    />
+    <input
+      type="text"
+      id="email"
+      formControlName="email"
+      class="w-1/4 p-2 border rounded"
+      placeholder="Email"
+    />
+
+    <button
+      type="submit"
+      class="mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"
+    >
+      Add Contact
+    </button>
+  </form>
+  <div
+    id="error"
+    data-testid="error"
+    [hidden]="!errors()"
+    class="text-red-600 mb-4 "
+  >
+    <ul>
+      <li>
+        {{ errors().nameError }}
+      </li>
+      <li>
+        {{ errors().mobileError }}
+      </li>
+      <li>
+        {{ errors().emailError }}
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="p-10">
+  <h3 class="text-3xl font-normal leading-normal mb-5">Contact Summary</h3>
+  <table cdk-table class="table w-full" [dataSource]="contacts$">
+    <ng-container cdkColumnDef="name">
+      <th cdk-header-cell *cdkHeaderCellDef class="text-start">Name</th>
+      <td cdk-cell *cdkCellDef="let contact">{{ contact.name }}</td>
+    </ng-container>
+    <ng-container cdkColumnDef="mobile">
+      <th cdk-header-cell *cdkHeaderCellDef class="text-start">Mobile</th>
+      <td cdk-cell *cdkCellDef="let contact">{{ contact.mobile }}</td>
+    </ng-container>
+    <ng-container cdkColumnDef="email">
+      <th cdk-header-cell *cdkHeaderCellDef class="text-start">Email</th>
+      <td cdk-cell *cdkCellDef="let contact">{{ contact.email }}</td>
+    </ng-container>
+    <tr cdk-header-row *cdkHeaderRowDef="displayedColumns"></tr>
+    <tr
+      class="hover"
+      cdk-row
+      *cdkRowDef="let row; columns: displayedColumns"
+    ></tr>
+  </table>
+</div>
